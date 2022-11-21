@@ -7,8 +7,25 @@ using namespace std;
 
 
 // Быстрая сортировка массива A длины N 
-void quickSort(int* A, int N){    
+void quickSort(int* A, int b, int e){    
+    int l = b, r = e;
     
+    // Опорный элемент - средний
+    int m = A[(l + r) / 2];
+
+    // Пока l не стал больше r
+    while(l <= r){
+        while(A[l] < m) l++;
+        while(A[r] > m) r--;
+
+        if(l <= r){
+            swap(A[l++], A[r--]);
+        }
+    }
+
+    // Рекурсия
+    if(b < r) quickSort(A, b, r);
+    if(e > l) quickSort(A, l, e);
 }
 
 
@@ -27,7 +44,7 @@ int main(){
     }
 
     // Сортировка массива пузырьком
-    quickSort(A, N);
+    quickSort(A, 0, N - 1);
 
     // Вывод массива
     cout << "Отсортированный массив:\n";
