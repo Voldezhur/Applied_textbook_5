@@ -2,6 +2,7 @@
 
 
 #include <iostream>
+#include <chrono>
 
 using namespace std;
 
@@ -39,15 +40,20 @@ int main(){
         cin >> A[i];
     }
 
-    // Сортировка массива пузырьком
+    // Сортировка массива выбором
+    auto begin = chrono::steady_clock::now();
     choiceSort(A, N);
+    auto end = chrono::steady_clock::now();
 
     // Вывод массива
     cout << "Отсортированный массив:\n";
-
     for(int i = 0; i < N; i++){
         cout << A[i];
     }
+
+    // Расчет и вывод времени работы программы
+    auto elapsed_ns = chrono::duration_cast<chrono::nanoseconds>(end - begin);
+    cout << "\nВремя работы программы: " <<  elapsed_ns.count() << " наносекунд";
 
     delete[] A;
 }
